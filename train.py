@@ -6,6 +6,7 @@ from datasets import load_dataset
 
 from retnet.modeling_retnet import RetNetModelWithLMHead
 from retnet.configuration_retnet import load_config_from_yaml
+import torch
 
 
 @dataclass
@@ -24,7 +25,9 @@ def main():
     eval_dataset = load_dataset(args.dataset_name, split="validation")
 
     config = load_config_from_yaml(f"configs/retnet-{args.model_size}.yml")
-    model = RetNetModelWithLMHead(config)
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+    model = RetNetModelWithLMHead(config).to(device)
 
     tokenizer = AutoTokenizer.from_pretrained('gpt2')
     tokenizer.model_max_length = 16384

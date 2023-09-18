@@ -10,7 +10,7 @@ Check `play.ipynb` for minimal testing of parallel, recurrent, and chunkwise for
 Using `PyTorch` and huggingface `transformers`.
 
 ```bash
-pip install torch transformers
+pip install -r requirments.txt
 ```
 
 You may want to use `conda`.
